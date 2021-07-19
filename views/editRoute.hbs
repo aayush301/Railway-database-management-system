@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" conQtent="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Route: {{route.route_id}}</title>
+    <link rel="stylesheet" type="text/css" href="/style.css" />
+    <link rel="stylesheet" type="text/css" href="/styleForm.css" />
+    <link rel="stylesheet" type="text/css" href="/dropdown.css" />
+</head>
+
+<body>
+    {{>navbar}}
+    <div class="main">
+        <div class="container">
+            <form id="form" onsubmit="fun()" action="/routes/update?old_id={{route.route_id}}" method="post">
+            
+                <h1>Edit Route</h1>
+                <div class="form-group">
+                    <label>Route id:</label>
+                    <input type="number" class="form-input" value="{{route.route_id}}" name="new_id"
+                        placeholder="Edit route id" autocomplete="off" id='route_id' required autofocus>
+                    <div class="error">Route with given id is already present !</div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Source Station name:</label>
+                    <select class="form-input" data-dropdown="" name="src" id="src">
+                        {{#each stations}}
+                        <option value="{{station_id}}">{{station_name}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Destination station name:</label>
+                    <select class="form-input" data-dropdown="" name="dest" id="dest">
+                        {{#each stations}}
+                        <option value="{{station_id}}">{{station_name}}</option>
+                        {{/each}}
+                    </select>
+                    <div class="error">Src and dest stations should be different</div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Distance (km):</label>
+                    <input type="number" step="any" class="form-input" value="{{route.distance}}" name="dist"
+                        placeholder="Edit distance" autocomplete="off" required>
+                </div>
+                
+                <input type="submit" class="btn" value="Save">
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("src").value="{{route.station_id}}";
+        document.getElementById("dest").value="{{route.next_station_id}}";
+
+        function fun()
+        {
+            const routeId=document.getElementById('route_id').value;
+            var error1=false,error2=false;
+
+            if(routeId!={{route.route_id}})
+            {
+                {{#each routes}}
+                    if({{route_id}}==routeId)
+                        error1=true;
+                {{/each}}
+            }
+
+            if(document.getElementById('src').value==document.getElementById('dest').value)
+                error2=true;
+
+            if(error1)
+            {
+                event.preventDefault();
+                document.getElementsByClassName('error')[0].style.display='block';
+                document.getElementById('route_id').focus();
+            }
+            else
+                document.getElementsByClassName('error')[0].style.display='none';
+            
+            if(error2)
+            {
+                event.preventDefault();
+                document.getElementsByClassName('error')[1].style.display='block';
+            }
+            else
+                document.getElementsByClassName('error')[1].style.display='none';
+
+        }
+    </script>
+    <script src="/dropdown.js"></script>
+
+</body>
+
+</html>

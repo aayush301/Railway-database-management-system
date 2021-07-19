@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{station.station_name}}</title>
+    <link rel="stylesheet" type="text/css" href="/style.css" />
+    <link rel="stylesheet" type="text/css" href="/styleList.css" />
+</head>
+<body>
+    {{>navbar}}
+    <div class="main">
+        <button onclick="confirmDelete()" class="deletebtn">Delete</button>
+        <a href="/stations/{{station.station_id}}/edit" class="editbtn">Edit</a>
+        <ul>
+            <li>Station id: {{station.station_id}}</li>
+            <li>Station name: {{station.station_name}}</li>
+            <li>Address: {{station.station_address}}</li>
+            <li>City: {{station.station_city}}</li>
+            <li>State: {{station.station_state}}</li>
+            <li>Station Master id: {{station.station_master_id}}</li>
+            <li>Station Master name: {{station_master}}</li>
+        </ul>
+    </div>
+
+    <script>
+        function confirmDelete()
+        {
+            var x=confirm("Are you sure you want to delete?");
+            if(x)
+                window.location="/stations/delete/?id="+{{station.station_id}};
+            else
+                window.location="/stations/"+{{station.station_id}}+"/view";
+        }
+    </script>
+    
+</body>
+</html>

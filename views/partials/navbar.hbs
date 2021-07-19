@@ -1,0 +1,35 @@
+<div class="sidebar">
+<nav>
+    <a href="/trains">Trains</a>
+    <a href="/stations">Stations</a>
+    <a href="/routes">Routes</a>
+    <a href="/employees">Employees</a>
+    <a href="/timetable/add">Add Time table</a>
+</nav>
+</div>
+
+<script>
+    
+    var path=window.location.pathname.toLowerCase();
+    if(path.includes('train'))
+    {
+        document.querySelector('nav a:nth-Child(1)').classList.add('active');
+    }
+    else if(path.includes('station'))
+    {
+        document.querySelector('nav a:nth-Child(2)').classList.add('active');
+    }
+    else if(path.includes('route'))
+    {
+        document.querySelector('nav a:nth-Child(3)').classList.add('active');
+    }
+    else if(path.includes('employee'))
+    {
+        document.querySelector('nav a:nth-Child(4)').classList.add('active');
+    }
+    else if(path.includes('timetable'))
+    {
+        document.querySelector('nav a:nth-Child(5)').classList.add('active');
+    }
+
+</script>

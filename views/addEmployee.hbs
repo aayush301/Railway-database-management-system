@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New employee</title>
+    <link rel="stylesheet" type="text/css" href="/style.css" />
+    <link rel="stylesheet" type="text/css" href="/styleForm.css" />
+</head>
+
+<body>
+    {{>navbar}}
+
+    <div class="main">
+        <div class="container">
+            <form onsubmit="fun()" action="/employees/add" method="post">
+
+                <h1>Add New Employee</h1>                
+                <div class="form-group">
+                    <label>Employee id</label>
+                    <input type="number" class="form-input" name="id" placeholder="Enter employee id" autocomplete="off" id='emp_id' required autofocus>
+                    <div class="error">Employee with given id is already present !</div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Employee name</label>
+                    <input type="text" class="form-input" name="name" placeholder="Enter employee name" autocomplete="off" required>
+                </div>
+                
+                <input type="submit" class="btn" value="Add">
+            </form>
+        </div>
+    </div>
+    <script>
+        function fun()
+        {
+            const empId=document.getElementById('emp_id').value;
+            var error=false;
+            
+            {{#each employees}}
+                if({{employee_id}}==empId)
+                    error=true;
+            {{/each}}
+            
+            if(error)
+            {
+                event.preventDefault();
+                document.getElementsByClassName('error')[0].style.display='block';
+                document.getElementById('emp_id').focus();
+            }
+
+        }
+    </script>
+</body>
+
+</html>

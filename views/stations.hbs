@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stations</title>
+    <link rel="stylesheet" type="text/css" href="/style.css" />
+    <link rel="stylesheet" type="text/css" href="/styleForm.css" />
+    <link rel="stylesheet" type="text/css" href="/styleTable.css" />
+</head>
+
+<body>
+    {{>navbar}}
+    <div class="main">
+    <a href="/stations/add" class="addbtn">Add New Station</a>
+    <div class="container search">
+
+        <form action="/stations/search" method="get">
+            <input type="text" class="form-input" name="name" placeholder="Search by station id/name..." autocomplete="off" autofocus>
+            <input type="text" class="form-input" name="city" placeholder="Search by city..." autocomplete="off">
+            <input type="text" class="form-input" name="state" placeholder="Search by state..." autocomplete="off">
+            <button class="btn">Search</button>
+        </form>
+    </div>
+
+    <div class="container2">
+        <table>
+            <tr class="header">
+                <th>Station id</th>
+                <th>Station name</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Station master</th>
+            </tr>
+            {{#each stations}}
+            <tr onclick="window.location.href='/stations/{{station_id}}/view';"; style="cursor:pointer">
+                <td>{{station_id}}</td>
+                <td>{{station_name}}</td>
+                <td>{{station_city}}</td>
+                <td>{{station_state}}</td>
+                <td>{{station_master}}</td>
+            </tr>
+            {{/each}}
+        </table>
+    </div>
+    </div>
+</body>
+
+</html>

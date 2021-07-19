@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{train.train_name}}</title>
+    <link rel="stylesheet" type="text/css" href="/style.css" />
+    <link rel="stylesheet" type="text/css" href="/styleList.css" />
+    <link rel="stylesheet" type="text/css" href="/styleTable.css" />
+</head>
+
+<body>
+    {{>navbar}}
+    <div class="main">
+    <button onclick="confirmDelete()" class="deletebtn">Delete</button>
+    <a href="/trains/{{train.train_id}}/edit" class="editbtn">Edit</a>
+
+    <div class="container3">
+        <ul>
+            <li>Train id: {{train.train_id}}</li>
+            <li>Train name: {{train.train_name}}</li>
+            <li>Source Station id: {{train.src_id}}</li>
+            <li>Source Station name: {{train.src_name}}</li>
+            <li>Destination Station id: {{train.dest_id}}</li>
+            <li>Destination Station name: {{train.dest_name}}</li>
+            <li>Total Seats: {{train.total_seats}}</li>
+            <li>Train type: {{train.train_type}}</li>
+            {{#if schedule}}<li>Total journey length: {{totalLength}} km</li>{{/if}}
+        </ul>
+    </div>
+
+    {{#if schedule}}
+        <div class="container2">
+            <table>
+                <caption>Time table of {{train.train_name}}</caption>
+                <tr class="header">
+                    <th>Schedule id</th>
+                    <th>Station name</th>
+                    <th>Arrival time</th>
+                    <th>Departure time</th>
+                </tr>
+                {{#each schedule}}
+                <tr>
+                    <td>{{timetable_id}}</td>
+                    <td>{{station_name}}</td>
+                    <td>{{arrival_time}}</td>
+                    <td>{{departure_time}}</td>
+                </tr>
+                {{/each}}
+            </table>
+        </div>
+    {{/if}}
+
+    </div>
+
+    <script>
+        function confirmDelete() 
+        {
+            var x = confirm("Are you sure you want to delete?");
+            if (x)
+                window.location = "/trains/delete/?id=" + {{ train.train_id }};
+            else
+                window.location = "/trains/" + {{ train.train_id }} +"/view";
+        }
+    </script>
+
+</body>
+
+</html>

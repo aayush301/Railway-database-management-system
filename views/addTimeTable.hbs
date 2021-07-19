@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New time table</title>
+    <link rel="stylesheet" type="text/css" href="/style.css" />
+    <link rel="stylesheet" type="text/css" href="/styleTable.css" />
+    <link rel="stylesheet" type="text/css" href="/dropdown.css" />
+    <link rel="stylesheet" type="text/css" href="/styleFormTimeTable.css" />
+</head>
+
+<body>
+    {{>navbar}}
+    <div class="main">
+        <div class="container">
+            <form id="form" onsubmit="fun()" method="post">
+                <h1>Add timetable of a train</h1>
+                <label>Train name:</label>
+                <select class="form-input" data-dropdown="" name="train">
+                    {{#each trains}}
+                    <option value={{train_id}}>{{train_name}}</option>
+                    {{/each}}
+                </select>
+
+                <button type="button" class="btn add" onclick="add()">+</button>
+                <br><br>
+
+                <table>
+                    <tr class="header">
+                        <th>Timetable id</th>
+                        <th>Station name</th>
+                        <th>Arrival time</th>
+                        <th>Departure time</th>
+                    </tr>
+                    
+                    <tr>
+                        <td><input type="number" class="form-input" name="id1" required></td>
+                        <td>
+                            <select class="form-input" data-dropdown="" name="station1">
+                                {{#each stations}}
+                                <option value="{{station_id}}">{{station_name}}</option>
+                                {{/each}}
+                            </select>
+                        </td>
+                        <td><input type="time" class="form-input" name="arrival1"></td>
+                        <td><input type="time" class="form-input" name="departure1"></td>
+                    </tr>
+                </table>
+                
+                <input type="submit" class="btn" value="Add">
+            </form>
+        </div>
+    </div>
+
+
+    <script>
+        var count = 1;
+        function fun()
+        {
+            document.getElementById("form").action = "/timetable/add?num=" + count;
+        }
+        function add() 
+        {
+            ++count;
+
+            var table = document.querySelector('table');
+            var row = table.insertRow();
+
+            var cell0 = row.insertCell(0);
+            cell0.innerHTML = '<input type="number" class="form-input" required>';
+            var cell1 = row.insertCell(1);
+
+            cell1.innerHTML = '<select class="form-input" data-dropdown="">{{#each stations}}<option value="{{station_id}}">{{station_name}}</option>{{/each}}</select>';
+            var cell2 = row.insertCell(2);
+            cell2.innerHTML = '<input type="time" class="form-input">';
+            var cell3 = row.insertCell(3);
+            cell3.innerHTML = '<input type="time" class="form-input">';
+
+            var inputs = row.querySelectorAll('input,select');
+            inputs[0].setAttribute('name', `id${count}`);
+            inputs[1].setAttribute('name', `station${count}`);
+            inputs[2].setAttribute('name', `arrival${count}`);
+            inputs[3].setAttribute('name', `departure${count}`);
+
+            const dropdown = cell1.querySelector('[data-dropdown]');
+            createCustomDropdown(dropdown);
+        }
+
+    </script>
+
+    <script src="/dropdown.js"></script>
+
+
+</body>
+
+</html>

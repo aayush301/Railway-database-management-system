@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" conQtent="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Train: {{train.train_name}}</title>
+    <link rel="stylesheet" type="text/css" href="/style.css" />
+    <link rel="stylesheet" type="text/css" href="/styleForm.css" />
+    <link rel="stylesheet" type="text/css" href="/dropdown.css" />
+</head>
+
+<body>
+    {{>navbar}}
+    <div class="main">
+        <div class="container">
+            <form onsubmit="fun()" action="/trains/update?old_id={{train.train_id}}" method="post">
+    
+                <h1>Edit Train</h1>
+                <div class="form-group">
+                    <label>Train id:</label>
+                    <input type="number" class="form-input" value="{{train.train_id}}" name="new_id"
+                        placeholder="Edit train id" autocomplete="off" id='train_id' required autofocus>
+                    <div class="error">Train with given id is already present !</div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Train name:</label>
+                    <input type="text" class="form-input" value="{{train.train_name}}" name="name"
+                        placeholder="Edit train name" autocomplete="off" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Source station:</label>
+                    <select class="form-input" data-dropdown="" name="src" id="src">
+                        {{#each stations}}
+                        <option value="{{station_id}}">{{station_name}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>Destination station:</label>
+                    <select class="form-input" data-dropdown="" name="dest" id="dest">
+                        {{#each stations}}
+                        <option value="{{station_id}}">{{station_name}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>Total seats:</label>
+                    <input type="number" class="form-input" value="{{train.total_seats}}" name="seats"
+                        placeholder="Edit no. of seats" autocomplete="off" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Train type:</label>
+                    <select name="ttype" class="form-input" id="ttype">
+                        <option>Mail Express</option>
+                        <option>Superfast Express</option>
+                        <option>Passenger</option>
+                        <option>Rajdhani Express</option>
+                        <option>Shatabdi Express</option>
+                    </select>
+                </div>
+                
+                <input type="submit" class="btn" value="Save">
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("src").value="{{train.src_id}}";
+        document.getElementById("dest").value = "{{train.dest_id}}";
+        document.getElementById("ttype").value = "{{train.train_type}}";
+
+        function fun()
+        {
+            const trainId=document.getElementById('train_id').value;
+            var error=false;
+            
+            if(trainId!={{train.train_id}})
+            {
+                {{#each trains}}
+                    if({{train_id}}==trainId)
+                        error=true;
+                {{/each}}
+            }
+
+            if(error)
+            {
+                event.preventDefault();
+                document.getElementsByClassName('error')[0].style.display='block';
+                document.getElementById('train_id').focus();
+            }
+
+        }
+    </script>
+    <script src="/dropdown.js"></script>
+
+</body>
+
+</html>

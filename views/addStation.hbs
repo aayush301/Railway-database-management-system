@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New station</title>
+    <link rel="stylesheet" type="text/css" href="/style.css" />
+    <link rel="stylesheet" type="text/css" href="/styleForm.css" />
+    <link rel="stylesheet" type="text/css" href="/dropdown.css" />
+</head>
+
+<body>
+    {{>navbar}}
+    <div class="main">
+        <div class="container">
+            <form onsubmit="fun()" action="/stations/add" method="post">
+                <h1>Add New Station</h1>
+                <div class="form-group">
+                    <label>Station id</label>
+                    <input type="number" class="form-input" name="id" placeholder="Enter station id" autocomplete="off" id='station_id'
+                        required autofocus>
+                    <div class="error">Station with given id is already present !</div>
+                </div>
+
+                <div class="form-group">
+                    <label>Station name</label>
+                    <input type="text" class="form-input" name="name" placeholder="Enter station name"
+                        autocomplete="off" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Address</label>
+                    <input type="text" class="form-input" name="address" placeholder="Enter address" autocomplete="off"
+                        required>
+                </div>
+                
+                <div class="form-group">
+                    <label>City</label>
+                    <input type="text" class="form-input" name="city" placeholder="Enter city" autocomplete="off"
+                        required>
+                </div>
+                
+                <div class="form-group">
+                    <label>State</label>
+                    <input type="text" class="form-input" name="state" placeholder="Enter state" autocomplete="off"
+                        required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Station master</label>
+                    <select class="form-input" data-dropdown="" name="master">
+                        {{#each employees}}
+                        <option value="{{employee_id}}">{{employee_name}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+                
+                <input type="submit" class="btn" value="Add">
+            </form>
+        </div>
+    </div>
+
+    <script src="/dropdown.js"></script>
+    <script>
+        function fun()
+        {
+            const stationId=document.getElementById('station_id').value;
+            var error=false;
+            
+            {{#each stations}}
+                if({{station_id}}==stationId)
+                    error=true;
+            {{/each}}
+            
+            if(error)
+            {
+                event.preventDefault();
+                document.getElementsByClassName('error')[0].style.display='block';
+                document.getElementById('station_id').focus();
+            }
+
+        }
+    </script>
+</body>
+
+</html>

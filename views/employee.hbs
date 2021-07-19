@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{employee.employee_name}}</title>
+    <link rel="stylesheet" type="text/css" href="/style.css" />
+    <link rel="stylesheet" type="text/css" href="/styleList.css" />
+</head>
+
+<body>
+    {{>navbar}}
+    <div class="main">
+    <button onclick="confirmDelete()" class="deletebtn">Delete</button>
+    <a href="/employees/{{employee.employee_id}}/edit" class="editbtn">Edit</a>
+    <div class="container">
+        <ul>
+            <li>Employee id: {{employee.employee_id}}</li>
+            <li>Employee name: {{employee.employee_name}}</li>
+            {{#if employee.station_name}}
+                <br>
+                <li>The employee is the Station Master for the station:</li>
+                <li>Station id: {{employee.station_id}}</li>
+                <li>Station Name: {{employee.station_name}}</li>
+            {{/if}}
+        </ul>
+    </div>
+
+    <script>
+        function confirmDelete() 
+        {
+            var x = confirm("Are you sure you want to delete?");
+            if (x)
+                window.location = "/employees/delete/?id=" + {{ employee.employee_id }};
+            else
+                window.location = "/employees/" + {{ employee.employee_id }}+ "/view";
+        }
+    </script>
+    </div>
+
+</body>
+
+</html>

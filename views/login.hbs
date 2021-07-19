@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="/style.css" >
+    <link rel="stylesheet" type="text/css" href="/styleForm.css" >
+</head>
+<body>
+
+    <h1>Railway Database Management System</h1>
+    <div class="container">
+        <form action="/login" method="post">
+            
+            <h1>Admin Login</h1>
+            <div class='form-group'>
+                <label>Admin Name</label>
+                <input type="text" class="form-input" name="name" placeholder="Enter admin name" autocomplete="off" required autofocus>
+            </div>
+
+            <div class='form-group'>
+                <label>Password</label>
+                <input type="password" class="form-input" name="password" placeholder="Enter password" autocomplete="off" required>
+            </div>
+            {{#if error}}
+                <div class="error" style="display: block;">Admin not found!!</div>
+            {{/if}}
+
+            <input type="submit" class="btn" value="Login">
+
+        </form>
+    </div>
+
+</body>
+</html>

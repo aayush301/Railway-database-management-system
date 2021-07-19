@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Routes</title>
+    <link rel="stylesheet" type="text/css" href="/style.css" />    
+    <link rel="stylesheet" type="text/css" href="/styleTable.css" />
+</head>
+
+<body>
+
+    {{>navbar}}
+
+    <div class="main">
+    <a href="/routes/add" class="addbtn">Add New Route</a>
+    <div class="container2">
+        <table>
+            <tr class="header">
+                <th>Route id</th>
+                <th>Source Station name</th>
+                <th>Destination Station name</th>
+                <th>Distance (in km)</th>
+            </tr>
+            {{#each routes}}
+            <tr onclick="window.location.href='/routes/{{route_id}}/view';"; style="cursor:pointer">
+                <td>{{route_id}}</td>
+                <td>{{src_name}}</td>
+                <td>{{dest_name}}</td>
+                <td>{{distance}}</td>
+            </tr>
+            {{/each}}
+        </table>
+    </div>
+    </div>
+</body>
+
+</html>

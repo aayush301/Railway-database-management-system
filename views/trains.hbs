@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trains</title>
+    <link rel="stylesheet" type="text/css" href="/style.css" />
+    <link rel="stylesheet" type="text/css" href="/styleForm.css" />
+    <link rel="stylesheet" type="text/css" href="/styleTable.css" />
+</head>
+
+<body>
+    
+    {{>navbar}}
+    <div class="main">
+    <a href="/trains/add" class="addbtn">Add New Train</a>
+    <div class="container search">
+        <form action="/trains/search" method="get">
+            <input type="text" class="form-input" name="train_info" placeholder="Search by train id/name..." autocomplete="off" autofocus>
+            <input type="text" class="form-input" name="src" placeholder="Search by source station..." autocomplete="off">
+            <input type="text" class="form-input" name="dest" placeholder="Search by destination station..." autocomplete="off">
+            <select name="ttype" class="form-input">
+                <option>All types</option>
+                <option>Mail Express</option>
+                <option>Superfast Express</option>
+                <option>Passenger</option>
+                <option>Rajdhani Express</option>
+                <option>Shatabdi Express</option>
+            </select>
+            <button class="btn">Search</button>
+        </form>
+    </div>
+
+    <div class="container2">
+        <table>
+            <tr class="header">
+                <th>Train id</th>
+                <th>Train name</th>
+                <th>Source station</th>
+                <th>Destination station</th>
+                <th>Train type</th>
+            </tr>
+
+            {{#each trains}}
+            <tr id="train" onclick="window.location.href='/trains/{{train_id}}/view';"; style="cursor:pointer">
+                <td>{{train_id}}</td>
+                <td>{{train_name}}</td>
+                <td>{{src_name}}</td>
+                <td>{{dest_name}}</td>
+                <td>{{train_type}}</td>
+            </tr>
+            {{/each}}
+        </table>
+    </div>
+
+    </div>
+    
+</body>
+
+</html>

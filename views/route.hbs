@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Route {{route.route_id}}</title>
+    <link rel="stylesheet" type="text/css" href="/style.css" />
+    <link rel="stylesheet" type="text/css" href="/styleList.css" />
+</head>
+
+<body>
+    {{>navbar}}
+    <div class="main">
+    <button onclick="confirmDelete()" class="deletebtn">Delete</button>
+    <a href="/routes/{{route.route_id}}/edit" class="editbtn">Edit</a>
+    <div class="container">
+        <ul>
+            <li>Route id: {{route.route_id}}</li>
+            <li>Source Station id: {{route.station_id}}</li>
+            <li>Source Station name: {{route.station}}</li>
+            <li>Destination Station id: {{route.next_station_id}}</li>
+            <li>Destination Station name: {{route.next_station}}</li>
+            <li>Route distance: {{route.distance}} km</li>
+        </ul>
+    </div>
+    </div>
+    <script>
+        function confirmDelete() 
+        {
+            var x = confirm("Are you sure you want to delete?");
+            if (x)
+                window.location = "/routes/delete/?id=" + {{ route.route_id }};
+            else
+                window.location = "/routes/" + {{ route.route_id }} + "/view";
+        }
+    </script>
+
+</body>
+
+</html>

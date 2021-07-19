@@ -1,0 +1,108 @@
+*
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* font-size: 20px; */
+}
+
+body
+{
+    font-family: sans-serif;
+    background-color: rgb(243, 243, 234);
+    font-size: 20px;
+}
+
+
+/* navigation bar */
+
+nav
+{
+    width: 200px;
+    height:100%;
+    position: fixed;
+    background-color: black;
+    padding: 0;
+    margin: 0;
+}
+
+nav a
+{
+    display: block;
+    font-size: 20px;        
+    padding: 20px;
+    color:white;
+    text-decoration: none;
+}
+
+nav a.active
+{
+    border-left: 4px solid yellow;
+    background-color: rgb(34, 33, 33);
+}
+
+nav a:hover
+{
+    transform: scale(1.02);
+    background-color: blue;
+}
+
+
+
+/* edit and delete buttons */
+
+.addbtn, .editbtn, .deletebtn
+{
+    display: block;
+    padding: 10px;
+    margin: 20px;
+    margin-left: auto;
+    margin-right: 25px;
+    width: 200px;
+    height:40px;
+    border: none;
+    outline: none;
+    background: blue;
+    cursor: pointer;
+    font-size: 16px;
+    text-transform: uppercase;
+    color: white;
+    border-radius: 4px;
+    text-decoration: none;
+    text-align: center;
+    font-weight: bold;
+    position: relative;
+
+}
+
+
+.editbtn, .deletebtn
+{
+    display: inline;
+    float: right;
+    width: 150px;
+}
+
+.deletebtn
+{
+    background-color: red;
+}
+
+.addbtn:hover,.editbtn:hover,.deletebtn:hover
+{
+    opacity: 0.6;
+}
+
+.main
+{
+    margin-left: 200px;
+    padding: 20px 10px 200px 10px;
+}
+
+body>h1
+{
+    text-align: center;
+    background-color: #ebd5ff;
+    text-transform: uppercase;
+    padding: 15px;
+}
